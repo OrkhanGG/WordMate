@@ -7,10 +7,10 @@ import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import gui.UICore;
-import gui.controls.GMenuBar;
 import gui.frames.GUIFrame;
 import gui.panels.TranslateUIPanel;
 import io.InputCore;
+import utils.Constants;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -34,10 +34,9 @@ public class Application {
                 uiCore.setMainUIPanel(new TranslateUIPanel());
                 uiCore.setMainUIFrame(new GUIFrame<>(JFrame.class, UICore.getInstance().getMainUIPanel()));
                 uiCore.appendFrame("Main", UICore.getInstance().getMainUIFrame());
+                uiCore.getMainUIFrame().setFrameName(Constants.APP_NAME);
                 uiCore.getMainUIFrame().Initialize();
                 uiCore.getMainUIFrame().setOnCloseCallback(()->{System.exit(1);});// Call this function on close
-                uiCore.getMainUIFrame().getAppFrame().setJMenuBar(new GMenuBar());
-
                 SwingUtilities.updateComponentTreeUI((JFrame)uiCore.getMainUIFrame().getAppFrame());
             }
         });

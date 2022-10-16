@@ -1,6 +1,6 @@
 package gui.utils.icons;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import utils.Constants;
 
 import javax.swing.*;
@@ -35,10 +35,10 @@ public class IconManager {
             System.err.printf("%s: Unexpected icon request", this.getClass().getName());
 
         // dark or light theme
-        if(UIManager.getLookAndFeel() instanceof FlatDarkLaf){
-            fileName += Constants.DARK_THEME_SUFFIX;
-        }else{
+        if(UIManager.getLookAndFeel() instanceof FlatLightLaf){
             fileName += Constants.LIGHT_THEME_SUFFIX;
+        }else{
+            fileName += Constants.DARK_THEME_SUFFIX;
         }
 
         fileName += Constants.IMAGE_ICON_EXTENSION;

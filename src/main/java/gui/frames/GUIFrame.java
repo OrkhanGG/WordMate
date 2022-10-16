@@ -1,7 +1,5 @@
 package gui.frames;
 
-import com.formdev.flatlaf.icons.FlatWindowCloseIcon;
-import com.formdev.flatlaf.icons.FlatWindowIconifyIcon;
 import utils.Callback;
 import utils.Constants;
 
@@ -20,9 +18,11 @@ import static gui.frames.GUIFrame.FrameType.FT_JDIALOG;
 import static gui.frames.GUIFrame.FrameType.FT_JFRAME;
 
 public final class GUIFrame<E> {
-    private final JPanel childPanel;
+    String frameName = null;
+    JLabel frameLabel = null;
     FrameType frameType;
     private E attachedObject = null;
+    private final JPanel childPanel;
     // Only JFrame can use frame and tray icon
     private BufferedImage frameIcon = null;
     private TrayIcon frameTrayIcon = null;
@@ -66,6 +66,10 @@ public final class GUIFrame<E> {
         } else {
             throw new IllegalArgumentException(String.format("%s is not an acceptable parameter!", attachedObject.getClass().getName()));
         }
+    }
+
+    public void setFrameName(String _frameName){
+        frameName = _frameName;
     }
 
     public E getAppFrame() {
@@ -147,10 +151,12 @@ public final class GUIFrame<E> {
         private int pointX = 0, pointY = 0;
 
         public BorderPanel(GUIFrame parentFrame) {
-            JLabel frameLabel = new JLabel("WordMate");
-            frameLabel.setText("<html>" + "<B>"+ "WordMate" + "</B>" + "</html>");
-            JButton closeButton = new JButton("",new FlatWindowCloseIcon());
-            JButton minimizeButton = new JButton("", new FlatWindowIconifyIcon());
+            frameLabel = new JLabel(frameName);
+            Font font = new Font("Courier", Font.BOLD,12);
+            frameLabel.setFont(font);
+
+            JButton closeButton = new JButton("x");
+            JButton minimizeButton = new JButton("-");
             FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
             setLayout(layout);
             add(frameLabel);
@@ -210,9 +216,12 @@ public final class GUIFrame<E> {
 
     private final class OutsidePanel extends JPanel {
         public OutsidePanel(GUIFrame parentFrame, JPanel childPanel) {
-            setLayout(new BorderLayout());
-            add(childPanel, BorderLayout.CENTER);
-            add(new BorderPanel(parentFrame), BorderLayout.PAGE_START);
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+            add(new BorderPanel(parentFrame));
+            add(new JSeparator(SwingConstants.HORIZONTAL));
+            add(childPanel);
+
             setBorder(new LineBorder(Color.DARK_GRAY,1,true));
         }
     }

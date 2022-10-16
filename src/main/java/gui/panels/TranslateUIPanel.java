@@ -5,14 +5,13 @@ import aws.api.TextToSpeechAPI;
 import aws.api.TranslateAPI;
 import com.formdev.flatlaf.icons.FlatDescendingSortIcon;
 import com.formdev.flatlaf.icons.FlatFileViewFileIcon;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import gui.frames.GUIFrame;
 import gui.utils.icons.ApplicationIcons;
 import gui.utils.icons.IconManager;
 import utils.ClipboardManager;
 import utils.Constants;
+import utils.serialization.structures.DictionaryAPIReader;
+import utils.serialization.structures.WordDefinition;
 
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
@@ -23,7 +22,6 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -367,7 +365,12 @@ public final class TranslateUIPanel extends JPanel{
                     return;
                 }
                 String words[] = selection.split(" ");
-                selection = words[0];// Only a word may be got
+
+                if(words.length > 1)
+                    return;
+
+                Point mousePointerLocation = new Point(
+                        MouseInfo.getPointerInfo().getLocation().x,  MouseInfo.getPointerInfo().getLocation().y);
 
                 String meaningDef = null;
                 try {
@@ -376,77 +379,12 @@ public final class TranslateUIPanel extends JPanel{
                     throw new RuntimeException(ex);
                 }
 
-                final Popup p = PopupFactory.getSharedInstance().getPopup(inputField, new
-                        JLabel("Here is my popup!"), MouseInfo.getPointerInfo().getLocation().x,  MouseInfo.getPointerInfo().getLocation().y);
-                p.show();
-                // create a timer to hide the popup later
-                Timer t = new Timer(5000, new ActionListener() {
+                // Create Panel for dialog
+                DictionaryAPIReader dictionaryAPIReader = new DictionaryAPIReader();
+                List<WordDefinition> definitionStructure = dictionaryAPIReader.Request(meaningDef);
 
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        p.hide();
-
-                    }
-                });
-                t.setRepeats(false);
-                t.start();
-
-                JsonArray allData = new JsonParser().parse(meaningDef).getAsJsonArray();
-                // Now Take Rates as JSON Object and capture it in a Map.
-                JsonArray raw = allData.getAsJsonArray();
-                for (var mainElements : raw) {
-                    final String word = mainElements.getAsJsonObject().get("word").getAsString();
-                    System.out.println("Word:" + word);
-
-                    System.out.println(mainElements.getAsJsonObject().get("phonetics"));
-
-                    JsonElement meanings = mainElements.getAsJsonObject().get("meanings");
-                    System.out.println("------Meanings");
-                    for (var meaning : meanings.getAsJsonArray()) {
-                        final String partOfSpeech = meaning.getAsJsonObject().get("partOfSpeech").getAsString();
-                        System.out.println("Part of speech:" + partOfSpeech);
-
-                        JsonElement definitions = meaning.getAsJsonObject().get("definitions");
-                        System.out.printf("Definitions(%s):\n",partOfSpeech);
-                        if (definitions != null) for (var definition : definitions.getAsJsonArray()) {
-
-                            JsonElement example = definition.getAsJsonObject().get("definition");
-                            System.out.println(example);
-
-                            JsonElement definitionSynonyms = definition.getAsJsonObject().get("synonyms");
-                            if(definitionSynonyms != null) for(var definitionSynonym : definitionSynonyms.getAsJsonArray()){
-                                // If exist any, will be displayed
-                                System.out.println(definitionSynonym);
-                            }
-
-                            JsonElement definitionAntonyms = definition.getAsJsonObject().get("antonyms");
-                            if(definitionAntonyms != null) for(var definitionAntonym : definitionAntonyms.getAsJsonArray()){
-                                // If exist any, will be displayed
-                                System.out.println(definitionAntonym);
-                            }
-                        }
-
-                        JsonElement synonyms = mainElements.getAsJsonObject().get("synonyms");
-                        System.out.println("---   Synonyms   ---");
-                        if(synonyms != null) for(var synonym : synonyms.getAsJsonArray()){
-                            System.out.println(synonym);
-                        }
-                        System.out.println("---   Synonyms End   ---");
-
-                        JsonElement antonyms = mainElements.getAsJsonObject().get("antonyms");
-                        System.out.println("---   Antonyms   ---");
-                        if(antonyms != null) for(var antonym : antonyms.getAsJsonArray()){
-                            System.out.println(antonym);
-                        }
-                        System.out.println("---   Antonyms End   ---");
-                    }
-                    System.out.println("-------------------");
-
-                    //System.out.println(mainElements.getAsJsonObject().get("license"));
-                    //System.out.println(mainElements.getAsJsonObject().get("sourceUrls"));
-                }
-
-
+                GUIFrame<JDialog> popUpDialog = new GUIFrame<JDialog>(JDialog.class, dictionaryAPIReader.CreateDefinitionStructureJPanel(definitionStructure));
+                popUpDialog.Initialize();
             }
         });
 
