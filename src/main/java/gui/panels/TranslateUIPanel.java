@@ -5,6 +5,7 @@ import aws.api.TextToSpeechAPI;
 import aws.api.TranslateAPI;
 import com.formdev.flatlaf.icons.FlatDescendingSortIcon;
 import com.formdev.flatlaf.icons.FlatFileViewFileIcon;
+import gui.controls.GMenuBar;
 import gui.frames.GUIFrame;
 import gui.utils.icons.ApplicationIcons;
 import gui.utils.icons.IconManager;
