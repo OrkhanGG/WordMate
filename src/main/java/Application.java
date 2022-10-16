@@ -7,6 +7,7 @@ import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import gui.UICore;
+import gui.controls.GMenuBar;
 import gui.frames.GUIFrame;
 import gui.panels.TranslateUIPanel;
 import io.InputCore;
@@ -35,6 +36,8 @@ public class Application {
                 uiCore.setMainUIFrame(new GUIFrame<>(JFrame.class, UICore.getInstance().getMainUIPanel()));
                 uiCore.appendFrame("Main", UICore.getInstance().getMainUIFrame());
                 uiCore.getMainUIFrame().setFrameName(Constants.APP_NAME);
+                uiCore.getMainUIFrame().setMenuBar(new GMenuBar());
+                uiCore.getMainUIFrame().setMinimizable(true);
                 uiCore.getMainUIFrame().Initialize();
                 uiCore.getMainUIFrame().setOnCloseCallback(()->{System.exit(1);});// Call this function on close
                 SwingUtilities.updateComponentTreeUI((JFrame)uiCore.getMainUIFrame().getAppFrame());

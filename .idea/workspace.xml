@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2e6b94a-e00e-4f0f-8aa1-9f149c1d8d7a" name="Changes" comment="Backup Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/serialization/structures/DictionaryAPIReader.java" afterDir="false" />
+    <list default="true" id="c2e6b94a-e00e-4f0f-8aa1-9f149c1d8d7a" name="Changes" comment="Up to 10 UI and Backend fixes">
       <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_10_2022_9_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_10_2022_9_35__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_10_2022_9_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_10_2022_9_37__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/frames/GUIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/frames/GUIFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/panels/TranslateUIPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/panels/TranslateUIPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/utils/icons/IconManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/utils/icons/IconManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/serialization/structures/WordDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/serialization/structures/WordDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/panels/dialogs/AppearanceDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/panels/dialogs/AppearanceDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Application$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Application$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Application.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$1.class" afterDir="false" />
@@ -22,7 +22,8 @@
       <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$FrameType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$FrameType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$OutsidePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$OutsidePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$3$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$5.class" afterDir="false" />
@@ -31,8 +32,8 @@
       <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$JTextFieldLimit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$JTextFieldLimit.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$TranslationInputOutputEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$TranslationInputOutputEnum.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/utils/icons/IconManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/utils/icons/IconManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utils/serialization/structures/WordDefinition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/serialization/structures/WordDefinition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

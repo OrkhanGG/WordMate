@@ -1,5 +1,6 @@
 package gui.frames;
 
+import gui.controls.GMenuBar;
 import utils.Callback;
 import utils.Constants;
 
@@ -13,19 +14,23 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static gui.frames.GUIFrame.FrameType.FT_JDIALOG;
 import static gui.frames.GUIFrame.FrameType.FT_JFRAME;
 
 public final class GUIFrame<E> {
-    String frameName = null;
-    JLabel frameLabel = null;
-    FrameType frameType;
+    private String frameName = null;
+    private JLabel frameLabel = null;
+    private FrameType frameType;
     private E attachedObject = null;
     private final JPanel childPanel;
     // Only JFrame can use frame and tray icon
     private BufferedImage frameIcon = null;
     private TrayIcon frameTrayIcon = null;
+    private GMenuBar menuBar = null;
+    private boolean isMinimizable = false;
 
     // EVENTS--------------------------------------------------
     private Callback onCloseCallback = null;
@@ -68,8 +73,18 @@ public final class GUIFrame<E> {
         }
     }
 
+    public void setMinimizable(boolean minimizable){
+        isMinimizable = minimizable;
+    }
+
+    public void setMenuBar(GMenuBar menuBar) {
+        this.menuBar = menuBar;
+    }
+
     public void setFrameName(String _frameName){
         frameName = _frameName;
+        if (frameLabel != null)
+            frameLabel.setText(frameName);
     }
 
     public E getAppFrame() {
@@ -151,31 +166,60 @@ public final class GUIFrame<E> {
         private int pointX = 0, pointY = 0;
 
         public BorderPanel(GUIFrame parentFrame) {
+            GridLayout layout = new GridLayout(1, 2);
+            setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
+            setLayout(layout);
+
+            JPanel leftSidePanel = new JPanel();
+            leftSidePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
             frameLabel = new JLabel(frameName);
             Font font = new Font("Courier", Font.BOLD,12);
             frameLabel.setFont(font);
+            leftSidePanel.add(frameLabel);
+            if (menuBar != null) leftSidePanel.add(menuBar);
 
-            JButton closeButton = new JButton("x");
-            JButton minimizeButton = new JButton("-");
-            FlowLayout layout = new FlowLayout(FlowLayout.RIGHT);
-            setLayout(layout);
-            add(frameLabel);
-            add(minimizeButton);
-            add(closeButton);
+            JPanel headerButtonsPanel = new JPanel();
+            headerButtonsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            Map<String, JButton> headerButtons = new LinkedHashMap<>();
 
-            closeButton.addMouseListener(new MouseAdapter() {
+            if(isMinimizable) {
+                headerButtons.put("minimize", new JButton("-"));
+                headerButtonsPanel.add(headerButtons.get("minimize"));
+            }
+
+            headerButtons.put("close", new JButton("x"));
+            headerButtonsPanel.add(headerButtons.get("close"));
+
+            add(leftSidePanel);
+            add(headerButtonsPanel);
+
+            for (var button : headerButtons.entrySet())
+                button.getValue().addMouseListener(new MouseAdapter() {
                 public void mouseReleased(MouseEvent e) {
-                    if (frameType.equals(FT_JFRAME))
-                    {
-                        ((JFrame) attachedObject).dispose();
-                    }
-                    else if (frameType.equals(FT_JDIALOG))
-                        ((JDialog) attachedObject).dispose();
-                    else
-                        throw new IllegalArgumentException(String.format("%s is not an acceptable parameter!", attachedObject.getClass().getName()));
+                    if(button.getKey().equals("minimize")){
+                        if (frameType.equals(FT_JFRAME))
+                        {
+                            ((JFrame) attachedObject).setState(Frame.ICONIFIED);
+                        }
+                        else if (frameType.equals(FT_JDIALOG))
+                            ((JDialog) attachedObject).dispose();
+                        else
+                            throw new IllegalArgumentException(String.format("%s is not an acceptable parameter!", attachedObject.getClass().getName()));
+                    }else if(button.getKey().equals("close")){
+                        if (frameType.equals(FT_JFRAME))
+                        {
+                            ((JFrame) attachedObject).dispose();
+                        }
+                        else if (frameType.equals(FT_JDIALOG))
+                            ((JDialog) attachedObject).dispose();
+                        else
+                            throw new IllegalArgumentException(String.format("%s is not an acceptable parameter!", attachedObject.getClass().getName()));
 
-                    if(onCloseCallback != null)
-                        onCloseCallback.call();
+                        if(onCloseCallback != null)
+                            onCloseCallback.call();
+                    }
+                    else
+                        throw new IllegalArgumentException(String.format("There's no case considered for \"%s\" button:", button.getKey()));
                 }
             });
             addMouseListener(new MouseAdapter() {
@@ -222,7 +266,7 @@ public final class GUIFrame<E> {
             add(new JSeparator(SwingConstants.HORIZONTAL));
             add(childPanel);
 
-            setBorder(new LineBorder(Color.DARK_GRAY,1,true));
+            setBorder(new LineBorder(Color.DARK_GRAY,1));
         }
     }
 }

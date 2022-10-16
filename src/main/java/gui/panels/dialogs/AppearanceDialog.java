@@ -1,86 +1,125 @@
 package gui.panels.dialogs;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.*;
 import gui.UICore;
 import gui.frames.GUIFrame;
+import utils.Callback;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-public class AppearanceDialog extends JPanel{
+public class AppearanceDialog extends JPanel {
     private GUIFrame<JDialog> ParentFrame = null;
-    private List<JButton> themeButtons = null;
+    private JList<String> themeList = null;
     private JPanel themePanel = null;
     private JSlider opacity = null;
+
     public AppearanceDialog() {
         themePanel = new JPanel();
-        themePanel.setLayout(new GridLayout(2, 2));
-        themeButtons = new ArrayList<>();
-        themeButtons.add(new JButton("Light"));
-        themeButtons.add(new JButton("Silver"));
-        themeButtons.add(new JButton("Dark"));
-        themeButtons.add(new JButton("Carbon"));
+        themePanel.setLayout(new BoxLayout(themePanel, BoxLayout.Y_AXIS));
 
-        for(var button : themeButtons)
-            themePanel.add(button);
+        List<String> ThemeNames = new ArrayList<>();
+        {
+            ThemeNames.add("Arc");
+            ThemeNames.add("Arc Orange");
+            ThemeNames.add("Arc Dark");
+            ThemeNames.add("Arc Dark Orange");
+            ThemeNames.add("Carbon");
+            ThemeNames.add("Cobalt 2");
+            ThemeNames.add("Cyan Light");
+            ThemeNames.add("Dark Flat");
+            ThemeNames.add("Dark Purple");
+            ThemeNames.add("Dracula");
+            ThemeNames.add("Gradianto Dark Fuchsia");
+            ThemeNames.add("Gradianto Deep Ocean");
+            ThemeNames.add("Gradianto Midnight Blue");
+            ThemeNames.add("Gradianto Nature Green");
+        }
 
-        opacity = new JSlider(JSlider.HORIZONTAL,30,100,100);
+        themeList = new JList(ThemeNames.toArray());
+        themeList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        themeList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        themeList.setVisibleRowCount(-1);
 
-        Hashtable<Integer, JLabel> labelTable =
-                new Hashtable<Integer, JLabel>();
-        labelTable.put(30, new JLabel("Transparent") );
-        labelTable.put(100, new JLabel("Opaque") );
+        themePanel.add(themeList);
+
+        opacity = new JSlider(JSlider.HORIZONTAL, 30, 100, 100);
+
+        Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
+        labelTable.put(30, new JLabel("Transparent"));
+        labelTable.put(100, new JLabel("Opaque"));
         opacity.setLabelTable(labelTable);
         opacity.setPaintLabels(true);
 
         setLayout(new BorderLayout());
         add(themePanel, BorderLayout.PAGE_START);
         add(opacity, BorderLayout.PAGE_END);
-        setSize(new Dimension(300,200));
+        setSize(new Dimension(300, 200));
 
         addListeners();
 
-        ParentFrame = new GUIFrame<>(JDialog.class,this);
+        ParentFrame = new GUIFrame<>(JDialog.class, this);
+        ParentFrame.setFrameName("Themes");
         ParentFrame.Initialize();
     }
 
-    private void addListeners(){
+    private void addListeners() {
         opacity.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                final float op = opacity.getValue()/100.f;
+                final float op = opacity.getValue() / 100.f;
 
-                ((JFrame)((GUIFrame<JFrame>) UICore.getInstance().getFrame("Main")).getAppFrame()).setOpacity(op);
+                ((GUIFrame<JFrame>) UICore.getInstance().getFrame("Main")).getAppFrame().setOpacity(op);
                 ParentFrame.getAppFrame().setOpacity(op);
             }
         });
 
-        for (JButton button : themeButtons) {
-            button.addActionListener(e -> {
-                try {
-                    final String btnName = button.getText();
-                    switch (btnName) {
-                        case "Light" -> UIManager.setLookAndFeel(new FlatLightLaf());
-                        case "Silver" -> UIManager.setLookAndFeel(new FlatIntelliJLaf());
-                        case "Dark" -> UIManager.setLookAndFeel(new FlatDarkLaf());
-                        case "Carbon" -> UIManager.setLookAndFeel(new FlatDarculaLaf());
-                    }
-                } catch (UnsupportedLookAndFeelException ex) {
-                    throw new RuntimeException(ex);
+        Callback callback = ()->{
+            try {
+                final String btnName = themeList.getSelectedValue();
+                switch (btnName) {
+                    case "Arc" -> UIManager.setLookAndFeel(new FlatArcIJTheme());
+                    case "Arc Orange" -> UIManager.setLookAndFeel(new FlatArcOrangeIJTheme());
+                    case "Arc Dark" -> UIManager.setLookAndFeel(new FlatArcDarkIJTheme());
+                    case "Arc Dark Orange" -> UIManager.setLookAndFeel(new FlatArcDarkOrangeIJTheme());
+                    case "Carbon" -> UIManager.setLookAndFeel(new FlatCarbonIJTheme());
+                    case "Cobalt 2" -> UIManager.setLookAndFeel(new FlatCobalt2IJTheme());
+                    case "Cyan Light" -> UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+                    case "Dark Flat" -> UIManager.setLookAndFeel(new FlatDarkFlatIJTheme());
+                    case "Dark Purple" -> UIManager.setLookAndFeel(new FlatDarkPurpleIJTheme());
+                    case "Dracula" -> UIManager.setLookAndFeel(new FlatDraculaIJTheme());
+                    case "Gradianto Dark Fuchsia" ->
+                            UIManager.setLookAndFeel(new FlatGradiantoDarkFuchsiaIJTheme());
+                    case "Gradianto Deep Ocean" -> UIManager.setLookAndFeel(new FlatGradiantoDeepOceanIJTheme());
+                    case "Gradianto Midnight Blue" ->
+                            UIManager.setLookAndFeel(new FlatGradiantoMidnightBlueIJTheme());
+                    case "Gradianto Nature Green" ->
+                            UIManager.setLookAndFeel(new FlatGradiantoNatureGreenIJTheme());
                 }
+            } catch (UnsupportedLookAndFeelException ex) {
+                throw new RuntimeException(ex);
+            }
 
-                SwingUtilities.updateComponentTreeUI(((JFrame)((GUIFrame<JFrame>) UICore.getInstance().getFrame("Main")).getAppFrame()));
-                SwingUtilities.updateComponentTreeUI(this);
-                ParentFrame.getAppFrame().dispose();
-            });
-        }
+            SwingUtilities.updateComponentTreeUI(((GUIFrame<JFrame>) UICore.getInstance().getFrame("Main")).getAppFrame());
+            SwingUtilities.updateComponentTreeUI(this);
+            ParentFrame.getAppFrame().dispose();
+        };
+
+        themeList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (!arg0.getValueIsAdjusting()) {
+                    callback.call();
+                }
+            }
+        });
+
     }
 
 }
