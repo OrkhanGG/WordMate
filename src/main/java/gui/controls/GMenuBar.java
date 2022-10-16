@@ -5,6 +5,7 @@ import gui.utils.icons.ApplicationIcons;
 import gui.utils.icons.IconManager;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,6 +28,10 @@ public final class GMenuBar extends JMenuBar {
             this.add(i.getValue());
     }
 
+    @Override public void setBorder(Border border) {
+        return;
+    }
+
     private void InitMenus() {
         menus = new LinkedHashMap<>();
         menu_items = new LinkedHashMap<>();
@@ -40,13 +45,13 @@ public final class GMenuBar extends JMenuBar {
         menu_items.put(preferencesMenuName + "Favorites", new JMenuItem("Favorites"));
         menu_items.put(preferencesMenuName + "Contribute", new JMenuItem("Contribute"));
 
-        menus.put(settingsMenuName, new JMenu(settingsMenuName));
+        menus.put(settingsMenuName, new JMenu(""));
         menus.get(settingsMenuName).setIcon(settingsIcon);
         for (var i : menu_items.entrySet()) {
             i.getValue().addActionListener(e -> {onMenuItemClick(i.getKey());});
             if (i.getKey().contains(settingsMenuName)) menus.get(settingsMenuName).add(i.getValue());
         }
-        menus.put(preferencesMenuName, new JMenu(preferencesMenuName));
+        menus.put(preferencesMenuName, new JMenu(""));
         menus.get(preferencesMenuName).setIcon(preferencesIcon);
         for (var i : menu_items.entrySet())
             if (i.getKey().contains(preferencesMenuName)) menus.get(preferencesMenuName).add(i.getValue());
