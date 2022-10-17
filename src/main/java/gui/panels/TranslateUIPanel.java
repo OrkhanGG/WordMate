@@ -5,7 +5,6 @@ import aws.api.TextToSpeechAPI;
 import aws.api.TranslateAPI;
 import com.formdev.flatlaf.icons.FlatDescendingSortIcon;
 import com.formdev.flatlaf.icons.FlatFileViewFileIcon;
-import gui.controls.GMenuBar;
 import gui.frames.GUIFrame;
 import gui.utils.icons.ApplicationIcons;
 import gui.utils.icons.IconManager;
@@ -45,6 +44,8 @@ public final class TranslateUIPanel extends JPanel{
     private JDropdownButton outputLanguageDropdown;
     // GUI Controls
     private List<JToggleButton> inputUserLanguages = null;
+    private JComboBox inputReaderVoice = null;
+    private JScrollPane inputReaderVoicePane = null;
     private JButton inputReadLoudButton = null;
     private JButton inputCopyToClipboard = null;
     private JTextArea inputField = null;
@@ -52,6 +53,7 @@ public final class TranslateUIPanel extends JPanel{
     private JButton swapLanguages = null;
     private List<JToggleButton> outputUserLanguages = null;
     private JTextArea outputField = null;
+    private JComboBox outputReaderVoice = null;
     private JButton outputReadLoud = null;
     private JButton outputCopyToClipboard = null;
     public TranslateUIPanel() {
@@ -92,6 +94,7 @@ public final class TranslateUIPanel extends JPanel{
             inputField = new JTextArea();
             inputFieldScrollbar = new JScrollPane(inputField);
             inputFooterPanel = new JPanel();
+            inputReaderVoice = new JComboBox<>(getReaderVoices());
             inputReadLoudButton = new JButton("Play", IconManager.getInstance().getIcon(ApplicationIcons.ICON_PLAY));
             inputCopyToClipboard = new JButton("Copy to Clipboard", new FlatFileViewFileIcon());
             inputFieldCharacterCountIndicator = new JProgressBar(0, translateFieldMaxLength);
@@ -100,6 +103,7 @@ public final class TranslateUIPanel extends JPanel{
             outputField = new JTextArea("");
             outputFooterPanel = new JPanel();
             outputFieldScrollbar = new JScrollPane(outputField);
+            outputReaderVoice = new JComboBox<>(getReaderVoices());
             outputReadLoud = new JButton("Play", IconManager.getInstance().getIcon(ApplicationIcons.ICON_PLAY));
             outputCopyToClipboard = new JButton("Copy to Clipboard", new FlatFileViewFileIcon());
             ioFields = new JPanel();
@@ -147,11 +151,19 @@ public final class TranslateUIPanel extends JPanel{
             translatorPanel.add(ioFields, BorderLayout.CENTER);
 
             inputFooterPanel.setLayout(new GridLayout());
+            inputFooterPanel.add(inputReaderVoice);
+            // TODO: Add horizontal scrollbar for dropdown
+            inputReaderVoice.setPrototypeDisplayValue("Arabic Female Zeina");
+//            inputReaderVoicePane = new JScrollPane(inputReaderVoice,
+//                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+//                    JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+            //inputFooterPanel.add(inputReaderVoicePane);
             inputFooterPanel.add(inputReadLoudButton);
             inputFooterPanel.add(inputCopyToClipboard);
             inputFooterPanel.add(inputFieldCharacterCountIndicator);
 
             outputFooterPanel.setLayout(new GridLayout());
+            outputFooterPanel.add(outputReaderVoice);
             outputFooterPanel.add(outputReadLoud);
             outputFooterPanel.add(outputCopyToClipboard);
             ioFieldsFooterPanel.setLayout(new GridLayout(1, 2));
@@ -164,6 +176,12 @@ public final class TranslateUIPanel extends JPanel{
         }
 
         addEventListeners();
+    }
+
+    private String[] getReaderVoices() {
+        String country[]={"Arabic Female Zeina", "Catalan Female Arlet", "Chine Female Zhiyu", "Danish Female Naja",
+                            "Dutch Female Lotte", "English (British) Male Brian", "English (New Zealand) Female Aria"};
+        return country;
     }
 
     public void updateInputField(String textToTranslate) {

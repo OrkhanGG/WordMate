@@ -17,8 +17,11 @@ public class AppearanceDialog extends JPanel {
     private JList<String> themeList = null;
     private JPanel themePanel = null;
     private JSlider opacity = null;
+    private JScrollPane themePanelScrollPane;
 
     public AppearanceDialog() {
+        // TODO: Increase the size of this dialog
+        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         themePanel = new JPanel();
         themePanel.setLayout(new BoxLayout(themePanel, BoxLayout.Y_AXIS));
 
@@ -42,10 +45,13 @@ public class AppearanceDialog extends JPanel {
 
         themeList = new JList(ThemeNames);
         themeList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        themeList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        themeList.setVisibleRowCount(-1);
+        themeList.setLayoutOrientation(JList.VERTICAL);
+        themeList.setVisibleRowCount(7);
 
-        themePanel.add(themeList);
+        themePanelScrollPane = new JScrollPane();
+        themePanelScrollPane.setViewportView(themeList);
+
+        themePanel.add(themePanelScrollPane);
 
         opacity = new JSlider(JSlider.HORIZONTAL, 30, 100, 100);
 

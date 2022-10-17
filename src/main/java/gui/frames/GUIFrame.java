@@ -166,6 +166,8 @@ public final class GUIFrame<E> {
         private int pointX = 0, pointY = 0;
 
         public BorderPanel(GUIFrame parentFrame) {
+
+
             GridLayout layout = new GridLayout(1, 2);
             setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 0));
             setLayout(layout);

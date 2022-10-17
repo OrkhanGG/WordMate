@@ -4,13 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2e6b94a-e00e-4f0f-8aa1-9f149c1d8d7a" name="Changes" comment="Update">
+    <list default="true" id="c2e6b94a-e00e-4f0f-8aa1-9f149c1d8d7a" name="Changes" comment="Added: Minimize button functionality&#10;Fixed: Small UI bugs">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_10_2022_1_45_PM_[Changes]/GUICore$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_10_2022_1_45_PM_[Changes]/GUICore$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_10_2022_1_45_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_10_2022_1_45_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_10_2022_12_07_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_10_2022_12_07_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/frames/GUIFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/frames/GUIFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/panels/TranslateUIPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/panels/TranslateUIPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/panels/dialogs/AppearanceDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/panels/dialogs/AppearanceDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/TranslateUIPanel$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/panels/dialogs/AppearanceDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$BorderPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$OutsidePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/frames/GUIFrame$OutsidePanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,14 +202,7 @@
       <option name="project" value="LOCAL" />
       <updated>1665742711612</updated>
     </task>
-    <task id="LOCAL-00016" summary="Backup Commit">
-      <created>1665743276180</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1665743276180</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
